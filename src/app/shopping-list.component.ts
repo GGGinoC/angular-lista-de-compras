@@ -5,12 +5,14 @@ import { Component, Input } from '@angular/core';
   template: `
     <h1>Shopping List</h1>
     <ul>
-      <li (click)="deleteItem(item)" *ngFor="let item of list">
+      <li (click)="selectItem(item)" *ngFor="let item of list">
         {{item}}
       </li>
     </ul>
     <input  [(ngModel)]="newItem"  />
     <button (click)="addNewItem()">Add</button>
+    <button (click)="deleteItem()">delete</button>
+
   `,
   styles: [``]
 })
@@ -28,11 +30,18 @@ export class ShoppingListComponent  {
     this.newItem = '';
   }
 
-  deleteItem(item)
+  deleteItem(itm)
   {
+    itm = this.newItem;
     this.list = this.list.filter(cur => {
-      return cur != item
+      return cur != itm
     })
+    this.newItem = '';
+  }
+
+  selectItem(item)
+  {
+    this.newItem = item;
   }
 
 }
